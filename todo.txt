@@ -1,0 +1,25 @@
+Bugs
+====
+- Players can buy invalid items through the hero item suggestions
+
+Goals
+=====
+- Finish a trial game mode to learn framework
+- Several hero "classes": tank?, healer, DPS, and summoner
+
+Tasks
+=========
+- Fully heal creeps between rounds
+- Finish out remainder of map
+- Map details
+- Scoreboard for rounds
+- Rework items and heroes
+- New and more interesting creep camps
+
+Ideas
+=====
+- Try out possibilities for aggro (not sure what's possible), perhaps make heroes not follow creeps around (closer to original game mode)
+- Dominator/summon items
+- Optional boss creeps
+- Better final scoreboard (if possible)
+- Randomized couriers to kill for gold bounty?

@@ -1,0 +1,120 @@
+"dota_addon_template"
+{
+	"Spawns"
+	{
+		"0"
+		{
+			"SpawnerName"		"creep_spawner"
+			"NPCName"			"npc_dota_creep_goodguys_melee2"
+			"SpawnCount"		"3"
+			"SpawnTime"			"0"
+			"Allied"			"1"
+		}
+		"0_2"
+		{
+			"SpawnerName"		"creep_spawner"
+			"NPCName"			"npc_dota_creep_goodguys_ranged2"
+			"SpawnCount"		"2"
+			"SpawnTime"			"0"
+			"Allied"			"1"
+		}
+		"1"
+		{
+			"SpawnerName"		"spawner1"
+			"NPCName"			"npc_dota_neutral_kobold"
+			"SpawnCount"		"3"
+			"SpawnTime"			"0"
+		}
+		"2"
+		{
+			"SpawnerName"		"spawner2"
+			"NPCName"			"npc_dota_neutral_gnoll_assassin"
+			"SpawnCount"		"3"
+			"SpawnTime"			"10"
+		}
+		"3"
+		{
+			"SpawnerName"		"spawner3"
+			"NPCName"			"npc_dota_neutral_forest_troll_berserker"
+			"SpawnCount"		"3"
+			"SpawnTime"			"20"
+		}
+		"4"
+		{
+			"SpawnerName"		"spawner5"
+			"NPCName"			"npc_dota_neutral_kobold"
+			"SpawnCount"		"10"
+			"SpawnTime"			"30"
+		}
+		"5"
+		{
+			"SpawnerName"		"spawner4"
+			"NPCName"			"npc_dota_neutral_polar_furbolg_ursa_warrior"
+			"SpawnCount"		"1"
+			"SpawnTime"			"40"
+		}
+		"6"
+		{
+			"SpawnerName"		"spawner6"
+			"NPCName"			"npc_dota_neutral_mud_golem"
+			"SpawnCount"		"2"
+			"SpawnTime"			"50"
+		}
+		"7"
+		{
+			"SpawnerName"		"spawner7"
+			"NPCName"			"npc_dota_neutral_rock_golem"
+			"SpawnCount"		"1"
+			"SpawnTime"			"60"
+		}
+		"8"
+		{
+			"SpawnerName"		"spawner8"
+			"NPCName"			"npc_dota_neutral_ghost"
+			"SpawnCount"		"3"
+			"SpawnTime"			"70"
+		}
+		"9"
+		{
+			"SpawnerName"		"spawner9"
+			"NPCName"			"npc_dota_neutral_harpy_scout"
+			"SpawnCount"		"5"
+			"SpawnTime"			"80"
+		}
+		"10"
+		{
+			"SpawnerName"		"spawner10"
+			"NPCName"			"npc_dota_neutral_ogre_mauler"
+			"SpawnCount"		"4"
+			"SpawnTime"			"90"
+		}
+		"11"
+		{
+			"SpawnerName"		"spawner11"
+			"NPCName"			"npc_dota_neutral_satyr_hellcaller"
+			"SpawnCount"		"1"
+			"SpawnTime"			"100"
+		}
+		"12"
+		{
+			"SpawnerName"		"spawner12"
+			"NPCName"			"npc_dota_neutral_dark_troll"
+			"SpawnCount"		"3"
+			"SpawnTime"			"110"
+		}
+		"13"
+		{
+			"SpawnerName"		"spawner13"
+			"NPCName"			"npc_dota_neutral_polar_furbolg_champion"
+			"SpawnCount"		"4"
+			"SpawnTime"			"120"
+		}
+		"14"
+		{
+			"SpawnerName"		"spawner14"
+			"NPCName"			"npc_dota_neutral_black_dragon"
+			"SpawnCount"		"1"
+			"SpawnTime"			"130"
+		}
+	}
+}
