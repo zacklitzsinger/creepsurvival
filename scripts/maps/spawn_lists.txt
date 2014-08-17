@@ -6,15 +6,7 @@
 		{
 			"SpawnerName"		"creep_spawner"
 			"NPCName"			"npc_dota_creep_goodguys_melee2"
-			"SpawnCount"		"3"
-			"SpawnTime"			"0"
-			"Allied"			"1"
-		}
-		"0_2"
-		{
-			"SpawnerName"		"creep_spawner"
-			"NPCName"			"npc_dota_creep_goodguys_ranged2"
-			"SpawnCount"		"2"
+			"SpawnCount"		"1"
 			"SpawnTime"			"0"
 			"Allied"			"1"
 		}

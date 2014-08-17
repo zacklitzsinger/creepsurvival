@@ -1,49 +1,200 @@
 // Dota Heroes File
 "DOTAAbilities"
 {
-	"Version"		"1"
+        //=================================================================================================================
+        // Thunderbolt
+        //=================================================================================================================
+        "thunderbolt"
+                {
+                // General
+                //-------------------------------------------------------------------------------------------------------------
+                "BaseClass"                             "ability_datadriven"
+                "AbilityTextureName"                    "zuus_lightning_bolt"
+                "AbilityBehavior"                       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+                "AbilityUnitTargetTeam"                 "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                "AbilityUnitTargetType"                 "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+                "AbilityUnitDamageType"                 "DAMAGE_TYPE_PURE"   
+                "AbilityCastAnimation"                  "ACT_DOTA_ATTACK"
+ 
+                // Casting
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityCastRange"                              "700"
+                "AbilityCastPoint"                              "0.5 0.5 0.5 0.5"
+ 
+                // Time        
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityCooldown"                               "9.0 7.0 5.0 3.0"
+               
+                // Cost
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityManaCost"                               "100 90 80 70"
 
-	//=================================================================================================================
-	// Templar Assassin: Refraction Holdout
-	//=================================================================================================================
-	"templar_assassin_refraction_holdout"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+                "precache"
+                {
+                      "soundfile"                  "soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+                }
 
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+                "OnSpellStart"
+                {
 
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"17.0 17.0 17.0 17.0"
+                        "Damage"
+                        {
+                                "Target"                "TARGET"
+                                "Damage"                "%damage"
+                                "Type"                  "DAMAGE_TYPE_PURE"
+                        }
+                        "FireSound"
+                        {
+                                "EffectName"                    "Hero_Zuus.LightningBolt"
+                        }
+                }
 
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"100"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"damage_absorb"				"200 300 400 500"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"bonus_damage"				"20 40 60 80"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"duration"					"17.0 17.0 17.0 17.0"
-			}
-		}
-	}
+                // Special     
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilitySpecial"
+                {
+                        "01"
+                        {
+                                "var_type"                              "FIELD_INTEGER"
+                                "damage"                          "1000"
+                        }
+                }
+        }
+
+        //=================================================================================================================
+        // Heal
+        //=================================================================================================================
+        "heal"
+        {
+                // General
+                //-------------------------------------------------------------------------------------------------------------
+                "BaseClass"                             "ability_datadriven"
+                "AbilityTextureName"                    "omniknight_purification"
+                "AbilityBehavior"                       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+                "AbilityUnitTargetTeam"                 "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+                "AbilityUnitTargetType"                 "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC" 
+                "AbilityCastAnimation"                  "ACT_DOTA_ATTACK"
+ 
+                // Casting
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityCastRange"                              "700"
+                "AbilityCastPoint"                              "0.0 0.0 0.0 0.0"
+ 
+                // Time        
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityCooldown"                               "10.0"
+               
+                // Cost
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityManaCost"                               "50"
+               
+                "precache"
+                {
+                        "particle_folder"        "particles"
+                }
+
+                "OnSpellStart"
+                {
+ 
+                        "ApplyModifier"
+                        {
+                                "ModifierName"                          "modifier_heal"
+                                "Duration"                              "%duration"
+                                "Target"                                "TARGET"
+                        }
+                }
+ 
+                "Modifiers"
+                {
+                        "modifier_heal"
+                        {
+                                "IsDebuff"              "0"
+ 
+                                "AttachEffect"
+                                {
+                                        "EffectName"            "particles/test_particle.vpcf"
+                                        "EffectAttachType"      "follow_origin"
+                                        "Target"                "TARGET"
+                                }
+                                       
+                                "Duration"      "%duration"
+                                "Properties"
+                                {
+                                        "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%health_regen"
+                                }
+                        }
+                }
+               
+                // Special     
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilitySpecial"
+                {
+                        "01"
+                        {
+                                "var_type"                              "FIELD_FLOAT"
+                                "duration"                              "2.0 4.0 6.0 8.0"
+                        }
+                        "02"
+                        {
+                                "var_type"                              "FIELD_INTEGER"
+                                "health_regen"                          "200"
+                        }
+                }
+        }
+
+        //=================================================================================================================
+        // Summon Skeletons
+        //=================================================================================================================
+        "summon_skeletons"
+        {
+                // General
+                //-------------------------------------------------------------------------------------------------------------
+                "BaseClass"                             "ability_datadriven"
+                "AbilityTextureName"                    "skeleton_king_vampiric_aura"
+                "AbilityBehavior"                       "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+                "AbilityCastAnimation"                  "ACT_DOTA_ATTACK"
+ 
+                // Casting
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityCastRange"                              "700"
+                "AbilityCastPoint"                              "0.3"
+ 
+                // Time        
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityCooldown"                               "20.0"
+               
+                // Cost
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilityManaCost"                               "80"
+
+                "OnSpellStart"
+                {
+ 
+                        "SpawnUnit"
+                        {
+                                "UnitName"              "npc_dota_dark_troll_warlord_skeleton_warrior"
+                                "UnitCount"             "%unit_count"
+                                "UnitLimit"             "%unit_count"
+                                "SpawnRadius"           "200"
+                                "Duration"              "%duration"
+                                "Target"                "POINT"
+                        }
+                }
+               
+                // Special     
+                //-------------------------------------------------------------------------------------------------------------
+                "AbilitySpecial"
+                {
+                        "01"
+                        {
+                                "var_type"                              "FIELD_INTEGER"
+                                "unit_count"                              "4 6 8 10"
+                        }
+                        "02"
+                        {
+                                "var_type"                              "FIELD_FLOAT"
+                                "duration"                              "20.0"
+                        }
+                }
+        }
 }

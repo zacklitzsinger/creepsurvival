@@ -1,12 +1,14 @@
 -- Generated from template
 
 require( "creep_spawner" )
+require( "util" )
 
 if CAddonTemplateGameMode == nil then
 	CAddonTemplateGameMode = class({})
 end
 
 function Precache( context )
+	PrecacheUnitByNameSync("npc_dota_hero_lina", context)
 	--[[
 		Precache things we know we'll use.  Possible file types include (but not limited to):
 			PrecacheResource( "model", "*.vmdl", context )
@@ -34,6 +36,7 @@ function CAddonTemplateGameMode:InitGameMode()
 	GameRules:SetHeroRespawnEnabled( false )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( true )
 	GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( false )
+	GameRules:GetGameModeEntity():SetBuybackEnabled( false ) 
 
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
 
@@ -41,6 +44,7 @@ function CAddonTemplateGameMode:InitGameMode()
 	ListenToGameEvent( "entity_killed", Dynamic_Wrap( CAddonTemplateGameMode, "OnEntityKilled" ), self )
 	ListenToGameEvent( "dota_player_killed", Dynamic_Wrap( CAddonTemplateGameMode, "OnPlayerKilled" ), self )
 	ListenToGameEvent( "game_start", Dynamic_Wrap( CAddonTemplateGameMode, "OnGameStart" ), self )
+	ListenToGameEvent( "dota_item_purchased", Dynamic_Wrap(CAddonTemplateGameMode, "OnItemPurchase"), self)
 
 	self:_ReadGameConfiguration()
 	GameRules.sLastState = nil
@@ -88,7 +92,7 @@ end
 -- Evaluate the state of the game
 function CAddonTemplateGameMode:OnThink()
 	 -- Reconnect heroes
-    for _,hero in pairs(Entities:FindAllByClassname("#default_hero")) do
+    for _,hero in pairs(Entities:FindAllByClassname("npc_dota_hero_lina")) do
         if hero:GetPlayerOwnerID() == -1 then
             local id = hero:GetPlayerOwner():GetPlayerID()
             if id ~= -1 then
@@ -120,15 +124,13 @@ function CAddonTemplateGameMode:OnEntityKilled( event )
 end
 
 function CAddonTemplateGameMode:OnPlayerKilled( event )
-	self.nTotalHeroes = self.nTotalHeroes - 1
-
-	print ( string.format( "%d heroes left!", self.nTotalHeroes ))
-
 	self:CheckForDefeat()
 end
 
 function CAddonTemplateGameMode:CheckForDefeat()
-	if self.nTotalHeroes <= 0 or self:CountAlliedCreeps() < 0 then
+	if self:CountAlliedHeroes() <= 0 or self:CountAlliedCreeps() < 0 then
+		print (self:CountAlliedHeroes())
+		print (self:CountAlliedCreeps())
 		GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS )
 	end
 end
@@ -136,5 +138,41 @@ end
 function CAddonTemplateGameMode:OnPlayerConnectFull( keys )
     local player = PlayerInstanceFromIndex( keys.index + 1 )
     print( "Creating hero." )
-    local hero = CreateHeroForPlayer("#default_hero", player )
+    local playerHero = CreateHeroForPlayer("npc_dota_hero_lina", player )
+    -- Debug
+    playerHero:SetGold(10000, true)
+    -- Remove existing abilities
+	for id = 0, 3 do
+		local ab = playerHero:GetAbilityByIndex(id)
+		if ab ~= nil then
+			playerHero:RemoveAbility(ab:GetAbilityName())
+		end
+	end
+end
+
+function CAddonTemplateGameMode:OnItemPurchase(keys)
+	local playerID = keys.PlayerID
+	local playerInstance = PlayerInstanceFromIndex(playerID + 1)
+	local playerHero = playerInstance:GetAssignedHero()
+
+	local item = self:GetItemByName(playerHero, keys.itemname)
+	local abilityToAdd = string.gsub(item:GetAbilityName(), "item_ability_", "")
+	playerHero:AddAbility(abilityToAdd)
+	item:RemoveSelf()
+end
+
+function CAddonTemplateGameMode:GetItemByName( hero, name )
+  -- Find item by slot
+  for i = 0, 11 do
+    local item = hero:GetItemInSlot( i )
+    if item ~= nil then
+      local lname = item:GetAbilityName()
+	  print(string.format("%s item in %d slot, looking for %s", lname, i, name))
+      if lname == name then
+        return item
+      end
+    end
+  end
+
+  return nil
 end
